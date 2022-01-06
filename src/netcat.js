@@ -4,7 +4,7 @@ const { logger } = require('../lib/logger');
 const db = require('../lib/db');
 
 let server = nc.addr(process.env.localIP || "0.0.0.0")
-    .port(process.env.NCPort || 5555)
+    .port(Number(process.env.NCPort) || 5555)
     .k(true)
     .listen()
     .on('data', function (socket, data) {
