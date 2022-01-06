@@ -31,8 +31,8 @@ router.get('/:uuid', limiter, async (reg, res, next) => {
                 res.send(`No data found for uuid: ${value.uuid}`);
             } else {
                 res.status(200);
-                //res.send(`<text>${result.rows[0].text_data}</text>`);
-                res.send(`<pre style="word-wrap: break-word; white-space: pre-wrap;">${escape(result.rows[0].text_data)}</pre>`)
+                res.set('Content-Type', 'text/plain');
+                res.send(`${escape(result.rows[0].text_data)}`)
             }
         }).catch(err => {
             res.status(500);
