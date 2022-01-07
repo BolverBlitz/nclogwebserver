@@ -3,7 +3,6 @@ const path = require('path');
 const Joi = require('joi');
 const express = require('express');
 const rateLimit = require("express-rate-limit");
-const {escape} = require('html-escaper');
 const { logger } = require('../../lib/logger');
 const db = require('../../lib/db');
 
@@ -32,7 +31,7 @@ router.get('/:uuid', limiter, async (reg, res, next) => {
             } else {
                 res.status(200);
                 res.set('Content-Type', 'text/plain');
-                res.send(`${escape(result.rows[0].text_data)}`)
+                res.send(`${result.rows[0].text_data}`)
             }
         }).catch(err => {
             res.status(500);
