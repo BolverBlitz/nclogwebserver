@@ -77,3 +77,4 @@ typings/
 package-lock.json
 pg.env
 mysql.env
+db_store/*
