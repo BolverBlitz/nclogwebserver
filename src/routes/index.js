@@ -12,7 +12,7 @@ const limiter = rateLimit({
 });
 
 const NameSchema = Joi.object({
-    uuid: Joi.string().required()
+    uuid: Joi.string().required().regex(/^[a-zA-Z0-9]*$/i)
 });
 
 const router = express.Router();
