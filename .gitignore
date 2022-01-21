@@ -74,7 +74,13 @@ typings/
 
 # FuseBox cache
 .fusebox/
+
+# package-lock
 package-lock.json
+
+# .env files
 pg.env
 mysql.env
+
+# Database files
 db_store/*
