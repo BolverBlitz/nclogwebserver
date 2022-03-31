@@ -3,8 +3,8 @@ const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
-var path = require('path');
 const bodyParser = require('body-parser');
+const { logger } = require('../lib/logger');
 
 
 require('dotenv').config();
@@ -30,6 +30,12 @@ app.use(expressCspHeader({
   }
 }));
 app.use(bodyParser.urlencoded({ extended: false }))
+
+if (process.env.Enable_Static === 'true' || process.env.Enable_Static === true) {
+  logger('system', 'Static content enabled');
+  const static = require('./routes/static');
+  app.use('/static', static);
+}
 
 app.use('/fetch', routes);
 
