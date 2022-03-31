@@ -1,10 +1,10 @@
-const util = require('util')
-const path = require('path');
-const Joi = require('joi');
-const express = require('express');
+const util = require("util");
+const path = require("path");
+const fs = require("fs");
+const Joi = require("joi");
+const express = require("express");
 const rateLimit = require("express-rate-limit");
-const { logger } = require('../../lib/logger');
-const db = require('../../lib/db');
+const { logger } = require("../../lib/logger");
 
 const limiter = rateLimit({
     windowMs: 60 * 1000,
@@ -17,7 +17,7 @@ const NameSchema = Joi.object({
 
 const router = express.Router();
 
-router.get('/:uuid', limiter, async (reg, res, next) => {
+router.get("/:uuid", limiter, async (reg, res, next) => {
     try {
         const RequestData = {
             uuid: reg.params.uuid
@@ -30,14 +30,14 @@ router.get('/:uuid', limiter, async (reg, res, next) => {
                 res.send(`No data found for uuid: ${value.uuid}`);
             } else {
                 res.status(200);
-                res.set('Content-Type', 'text/plain');
+                res.set("Content-Type", "text/plain");
                 res.send(`${result.rows[0].text_data}`)
             }
         }).catch(err => {
             res.status(500);
         });
     } catch (error) {
-        logger('error', 'Error: ' + error);
+        logger("error", "Error: " + error);
         next(error);
     }
 });
