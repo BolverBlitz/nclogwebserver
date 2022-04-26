@@ -1,6 +1,7 @@
 const util = require("util");
 const path = require("path");
 const fs = require("fs");
+const db = require('../../lib/db');
 const Joi = require("joi");
 const express = require("express");
 const rateLimit = require("express-rate-limit");
